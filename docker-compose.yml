@@ -1,19 +1,48 @@
-version: '3.9'
+# version: '3.9'
 
+# services:
+#   db:
+#     image: postgres
+#     restart: always
+#     environment:      
+#       POSTGRES_DB: demo_db
+#       POSTGRES_USER: demo_user
+#       POSTGRES_PASSWORD: demo_password
+#     container_name: demo_postgres_db
+#     volumes:
+#       - ./pgdata:/var/lib/postgresql/data
+#     ports:
+#       - '5432:5432'
+
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: demo-app
+#     environment:
+#       - PORT=${PORT}
+#     ports:
+#       - '3001:3001'
+#     depends_on:
+#       - db
+#     volumes:
+#       - ./src:/app/src
+
+version: '3.9'
 services:
-  db:
+  postgres:
     image: postgres
     restart: always
-    environment:      
-      - POSTGRES_DB=demo_db
-      - POSTGRES_USER=demo
-      - POSTGRES_PASSWORD=demo123
-    container_name: demo_postgres_db
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
+    container_name: postgres_db
     ports:
       - '5432:5432'
-
+    environment:
+      POSTGRES_DB: demo_db
+      POSTGRES_USER: demo_user
+      POSTGRES_PASSWORD: demo_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
   app:
     build:
       context: .
@@ -24,6 +53,9 @@ services:
     ports:
       - '3001:3001'
     depends_on:
-      - db
+      - postgres
     volumes:
       - ./src:/app/src
+
+volumes:
+  postgres_data:
