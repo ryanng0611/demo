@@ -6,7 +6,7 @@ import { User } from './entities/user.entity';
 // export type User = User;
 
 @Injectable()
-export class UsersService {
+export class UserService {
 
   private readonly users = [
     {
@@ -25,6 +25,7 @@ export class UsersService {
     return 'This action adds a new user';
   }
 
+  // find and retrieve an array of empty User objects
   findAll() : User[] {
     return [];
   }
