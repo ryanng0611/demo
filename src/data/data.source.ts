@@ -7,7 +7,9 @@ export const dbdatasource: DataSourceOptions = {
   username: 'demo_user',
   password: 'demo_password',
   database: 'demo_db',
-  entities: [],
+  entities: ['dist/user/entities/user.entity.js'],
+  migrations: ['dist/migrations/*.js'],
+  migrationsTableName: "user_migrations",
   synchronize: false,
 };
 
