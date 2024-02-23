@@ -21,7 +21,10 @@
     "start:swc": "nest start -b swc -w --type-check",
     "start:repl": "nest start --entryFile repl",
     "typeorm": "npm run build && npx typeorm -d dist/data/data.source.js",
-    "migration:generate": "npm run typeorm -- migration:generate"
+    "migration:generate": "npm run typeorm -- migration:generate",
+    "migration:run": "npm run typeorm -- migration:run",
+    "migration:show": "npm run typeorm -- migration:show",
+    "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

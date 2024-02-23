@@ -2,7 +2,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 export const dbdatasource: DataSourceOptions = {
   // TypeORM PostgreSQL DB Drivers
   type: 'postgres',
-  host: 'postgres_db',
+  host: 'localhost',
   port: 5432,
   username: 'demo_user',
   password: 'demo_password',
