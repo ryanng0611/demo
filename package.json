@@ -19,7 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "start:swc": "nest start -b swc -w --type-check",
-    "start:repl": "nest start --entryFile repl"
+    "start:repl": "nest start --entryFile repl",
+    "typeorm": "npm run build && npx typeorm -d dist/data/data.source.js",
+    "migration:generate": "npm run typeorm -- migration:generate"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
