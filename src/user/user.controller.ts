@@ -20,15 +20,15 @@ export class UserController {
   constructor(private readonly usersService: UserService) {}
 
   @Post('createUser')
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    return await this.usersService.create(createUserDto);
   }
 
   // GET endpoint that retrieves a list of all users from the service
   // @UseGuards(AuthGuard)
   @Get('findAllUsers')
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  async findAll(): Promise<User[]> {
+    return await this.usersService.findAll();
   }
 
   @Get(':username')
@@ -46,7 +46,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.usersService.remove(+id);
   }
 }
