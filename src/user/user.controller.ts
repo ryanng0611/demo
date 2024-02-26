@@ -19,7 +19,7 @@ import { AuthGuard } from 'src/auth/auth.guard';
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
-  @Post()
+  @Post('createUser')
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -31,18 +31,18 @@ export class UserController {
     return this.usersService.findAll();
   }
 
-  // @Get(':username')
-  // async findOne(@Param('username') username: string): Promise<User> {
-  //   const user = await this.usersService.findOne(username);
-  //   if (!user) {
-  //     throw new NotFoundException(`User with username "${username}" not found.`);
-  //   }
-  //   return user;
-  // }
+  @Get(':username')
+  async findOne(@Param('username') username: string): Promise<User> {
+    const user = await this.usersService.findOne(username);
+    if (!user) {
+      throw new NotFoundException(`User with username "${username}" not found.`);
+    }
+    return user;
+  }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return await this.usersService.update(+id, updateUserDto);
   }
 
   @Delete(':id')

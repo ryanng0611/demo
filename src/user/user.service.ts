@@ -14,21 +14,16 @@ export class UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
-
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    return this.usersRepository
+      .createQueryBuilder()
+      .insert()
+      .into(User)
+      .values({
+        username: createUserDto.username,
+        password: createUserDto.password,
+      })
+      .execute();
   }
 
   // find and retrieve an array of empty User objects
@@ -45,10 +40,24 @@ export class UserService {
   }
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.users.find((user) => user.username === username);
+    return this.usersRepository
+      .createQueryBuilder()
+      .select('user')
+      .from(User, 'user')
+      .where('user.username = :username', { username })
+      .getOne();
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<void> {
+
+    await this.usersRepository
+      .createQueryBuilder()
+      .update()
+      .set({
+        username: updateUserDto.username,
+        password: updateUserDto.password,
+      })
+      .where('userId = :userId', { userId: id })
+      .execute();
   }
 }
