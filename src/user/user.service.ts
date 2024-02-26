@@ -14,8 +14,8 @@ export class UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    return this.usersRepository
+  async create(createUserDto: CreateUserDto) {
+    return await this.usersRepository
       .createQueryBuilder()
       .insert()
       .into(User)
@@ -27,8 +27,8 @@ export class UserService {
   }
 
   // find and retrieve an array of empty User objects
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  async findAll(): Promise<User[]> {
+    return await this.usersRepository.find();
   }
 
   // findOne(userId: number): Promise<User | null> {
