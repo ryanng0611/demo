@@ -9,10 +9,10 @@ import { DatabaseDataSource } from './database/migration.config';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot(DatabaseDataSource),
     ConfigModule.forRoot(),
     UserModule,
     AuthModule,
-    TypeOrmModule.forRoot(DatabaseDataSource),
   ],
   controllers: [AppController],
   providers: [AppService],

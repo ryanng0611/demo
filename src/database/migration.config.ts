@@ -1,21 +1,24 @@
+import { User } from 'src/user/entities/user.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
-const username:string = process.env.POSTGRES_USERNAME;
-const password: string = process.env.POSTGRES_PASSWORD;
-const database: string = process.env.POSTGRES_DATABASE;
-const host: string = process.env.POSTGRES_HOST;
-const port: number = parseInt(process.env.POSTGRES_PORT);
-console.log(port);
+
+const username = process.env.DB_USERNAME
+const password: string = process.env.POSTGRES_PASSWORD
+const database: string = process.env.POSTGRES_DATABASE
+const host: string = process.env.POSTGRES_HOST
+const port: number = parseInt(process.env.POSTGRES_PORT)
+// console.log(username);
+
 export const DatabaseDataSource: DataSourceOptions = {
   // TypeORM PostgreSQL DB Drivers
   type: 'postgres',
-  host,
-  port,
-  username,
-  password,
-  database,
-  entities: ['dist/user/entities/user.entity.js'],
+  host: 'postgres_db',
+  port: 5432,
+  username: 'demo_user',
+  password: 'demo_password',
+  database: 'demo_db',
+  entities: [User],
   migrations: ['dist/migrations/*.js'],
-  migrationsTableName: "user_migrations",
+  migrationsTableName: "migrations",
   synchronize: false,
 };
 
