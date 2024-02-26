@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  NotFoundException,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -15,20 +25,20 @@ export class UserController {
   }
 
   // GET endpoint that retrieves a list of all users from the service
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get('findAllUsers')
-  findAll() :User[] {
+  findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
-  @Get(':username')
-  async findOne(@Param('username') username: string): Promise<User> {
-    const user = await this.usersService.findOne(username);
-    if (!user) {
-      throw new NotFoundException(`User with username "${username}" not found.`);
-    }
-    return user;
-  }
+  // @Get(':username')
+  // async findOne(@Param('username') username: string): Promise<User> {
+  //   const user = await this.usersService.findOne(username);
+  //   if (!user) {
+  //     throw new NotFoundException(`User with username "${username}" not found.`);
+  //   }
+  //   return user;
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
