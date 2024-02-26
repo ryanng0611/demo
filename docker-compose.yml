@@ -41,7 +41,7 @@ services:
       POSTGRES_USER: demo_user
       POSTGRES_PASSWORD: demo_password
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     
   app:
     build:
@@ -51,11 +51,8 @@ services:
     environment:
       - PORT=${PORT}
     ports:
-      - '3001:3001'
+      - '3000:3000'
     depends_on:
       - postgres
     volumes:
       - ./src:/app/src
-
-volumes:
-  postgres_data:
