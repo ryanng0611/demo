@@ -7,13 +7,11 @@ import {
   Param,
   Delete,
   NotFoundException,
-  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('users')
 export class UserController {
@@ -35,7 +33,9 @@ export class UserController {
   async findOne(@Param('username') username: string): Promise<User> {
     const user = await this.usersService.findOne(username);
     if (!user) {
-      throw new NotFoundException(`User with username "${username}" not found.`);
+      throw new NotFoundException(
+        `User with username "${username}" not found.`,
+      );
     }
     return user;
   }
