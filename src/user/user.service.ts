@@ -49,7 +49,6 @@ export class UserService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<void> {
-
     await this.usersRepository
       .createQueryBuilder()
       .update()
