@@ -19,6 +19,3 @@ import { jwtConstants } from './utils/constants';
   exports: [AuthService],
 })
 export class AuthModule {}
-
-
-//curl http://localhost:3000/users/findAllUsers -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiam9obiIsImlhdCI6MTcwODU3OTU1MiwiZXhwIjoxNzA4NTgwMTUyfQ._go-pqJrUsuE_qaOyHP_LPX9uEkI3kdbzSwBXbm78Ec"
