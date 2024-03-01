@@ -39,6 +39,14 @@ export class UserService {
     await this.usersRepository.delete(id);
   }
 
+  async removeMultiple(ids: number[]): Promise<void> {
+    await Promise.all(
+      ids.map(async (id) => {
+        await this.usersRepository.delete(id);
+      }),
+    );
+  }
+
   async findOne(username: string): Promise<User | undefined> {
     return this.usersRepository
       .createQueryBuilder()
