@@ -12,8 +12,9 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-// import { ApiProperty } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Users')
 @Controller('users')
 export class UserController {
   constructor(private readonly usersService: UserService) {}
@@ -49,5 +50,22 @@ export class UserController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.usersService.remove(+id);
+  }
+
+  @Post('deleteUsers/:ids') // Assuming IDs are separated by a delimiter (e.g., comma)
+  async removeMultiple(@Param('ids') idsString: string) {
+    try {
+      // Convert the comma-separated string to an array of numbers
+      const userIdList = idsString.split(',').map(Number);
+
+      // Call your service method with the list of userIds
+      await this.usersService.removeMultiple(userIdList);
+
+      return; // No explicit return value needed for void methods
+    } catch (error) {
+      // Handle errors appropriately (e.g., logging, throwing error)
+      console.error(error);
+      throw error; // You might want to customize error handling and response
+    }
   }
 }
