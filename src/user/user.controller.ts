@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('Users')
 @Controller('users')
@@ -25,7 +27,8 @@ export class UserController {
   }
 
   // GET endpoint that retrieves a list of all users from the service
-  // @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Get('findAllUsers')
   async findAll(): Promise<User[]> {
     return await this.usersService.findAll();
