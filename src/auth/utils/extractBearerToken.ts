@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 import { Request } from 'express';
 
-export function extractBearerToken (request: Request) : string | undefined {
+export function extractBearerToken(request: Request): string | undefined {
   const authorizationHeader = request.headers.authorization;
   if (!authorizationHeader) {
     throw new BadRequestException('Authorization header is missing');
